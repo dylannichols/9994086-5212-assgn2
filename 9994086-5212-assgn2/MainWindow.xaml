@@ -28,8 +28,8 @@
         <Button Content="CLEAR LIST" Name="clearList" Grid.Column="0" Margin="247,482,11,44" Click="ClearList"/>
         <Button Content="UPDATE" Name="update" Grid.Column="1" Margin="31,421,227,105" Click="Update"/>
         <Button Content="ADD" Name="add" Grid.Column="1" Margin="247,421,11,105" Click="Add"/>
-        <Button Content="DELETE" Name="delete" Grid.Column="1" Margin="31,482,227,44"/>
-        <Button Content="CLEAR" Name="clear" Click="ClearForm" Grid.Column="1" Margin="248,482,10,44"/>
+        <Button Content="DELETE" Name="delete" Grid.Column="1" Margin="31,482,227,44" Click="Delete"/>
+        <Button Content="CLEAR" Name="clear" Click="Clear" Grid.Column="1" Margin="248,482,10,44"/>
 
 
 

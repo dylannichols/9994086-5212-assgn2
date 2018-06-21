@@ -73,9 +73,11 @@ namespace _9994086_5212_assgn2
             ClearDisplay();
         }
 
-        private void ClearForm(object sender, RoutedEventArgs e)
+        private void Clear(object sender, RoutedEventArgs e)
         {
             ClearBoxes();
+            firstName.Focus();
+            add.IsEnabled = true;
         }
 
         // Searches for the name entered into the search bar and if found, displays in the listbox
@@ -86,7 +88,7 @@ namespace _9994086_5212_assgn2
 
             if (toFind == "")
             {
-                MessageBox.Show("You must enter a customer name.");
+                MessageBox.Show("You must enter a customer name.", "Invalid input");
             }
             else
             {
@@ -98,7 +100,7 @@ namespace _9994086_5212_assgn2
                 }
                 if (result == -1)
                 {
-                    MessageBox.Show("Customer not found, please try again");
+                    MessageBox.Show("Customer not found, please try again", "Invalid input");
                     search.Focus();
                 }
                 else
@@ -110,9 +112,9 @@ namespace _9994086_5212_assgn2
 
         private void SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
+            add.IsEnabled = false;
             if (listBox.SelectedItem != null)
-            {
-                add.IsEnabled = false;
+            {  
                 var selected = listBox.SelectedItem as string;
 
                 var info = selected.Split('\t');
@@ -129,13 +131,13 @@ namespace _9994086_5212_assgn2
         {
             if (listBox.SelectedItem == null)
             {
-                MessageBox.Show("Please select a customer to update.");
+                MessageBox.Show("Please select a customer to update.", "Invalid input");
                 ClearDisplay();
                 DisplayCustomers();
             }
             else if (firstName.Text == "" || lastName.Text == "" || phone.Text == "")
             {
-                MessageBox.Show("All textboxes must be filled to continue.");
+                MessageBox.Show("All textboxes must be filled to continue.", "Invalid input");
             }
             else
             {
@@ -145,14 +147,52 @@ namespace _9994086_5212_assgn2
                 ClearBoxes();
                 ClearDisplay();
                 DisplayCustomers();
-                MessageBox.Show("Customer details updated.");
+                MessageBox.Show("Customer details updated.", "Success");
                 add.IsEnabled = true;
             }
         }
 
         private void Add(object sender, RoutedEventArgs e)
         {
+            if (firstName.Text == "" || lastName.Text == "" || phone.Text == "")
+            {
+                MessageBox.Show("All textboxes must be filled to continue.", "Invalid input");
+            }
+            else
+            {
+                CustomerDB.Add(new Customer(firstName.Text, lastName.Text, phone.Text));
+                ClearBoxes();
+                ClearDisplay();
+                DisplayCustomers();
+                MessageBox.Show("New customer has been added.", "Success");
+            }
+        }
 
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            if (listBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a customer to delete.", "Invalid input");
+                ClearDisplay();
+                DisplayCustomers();
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure you wanted to delete this customer?", "Delte Customer", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    CustomerDB.Remove(CustomerDB[SelectedItemIndex]);
+                    ClearBoxes();
+                    ClearDisplay();
+                    DisplayCustomers();
+                    MessageBox.Show("The customer has been deleted.", "Success");
+                    add.IsEnabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Operation cancelled.", "Cancelled");
+                }
+            }
         }
     }
 }
