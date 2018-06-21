@@ -1,0 +1,62 @@
+﻿<Window x:Class="_9994086_5212_assgn2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_9994086_5212_assgn2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="EnterCustomerName:" Margin="20,10,200,380" FontSize="20"/>
+        <TextBox Grid.Column="0" Margin="20,53,183,479" Name="search" FontSize="15"/>
+        <Button Margin="284,53,0,479" Content="Search" Name="searchBtn" Click="Search"/>
+        
+        <ListBox Margin="19,121,11,140" Name="listBox" SelectionChanged="SelectedIndexChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Foreground="Black" FontSize="20"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Content="LIST CUSTOMERS" Name="listCust" Click="ListCustomers" Grid.Column="0" Margin="20,482,238,44"/>
+        <Button Content="CLEAR LIST" Name="clearList" Grid.Column="0" Margin="247,482,11,44" Click="ClearList"/>
+        <Button Content="UPDATE" Name="update" Grid.Column="1" Margin="31,421,227,105" Click="Update"/>
+        <Button Content="ADD" Name="add" Grid.Column="1" Margin="247,421,11,105"/>
+        <Button Content="DELETE" Name="delete" Grid.Column="1" Margin="31,482,227,44"/>
+        <Button Content="CLEAR" Name="clear" Click="ClearBoxes" Grid.Column="1" Margin="248,482,10,44"/>
+
+
+
+
+
+        <GroupBox Margin="60,105,47,202" Grid.Column="1" BorderThickness="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="CustomerDetails:" Grid.Column="1" Grid.Row="0" FontSize="20" HorizontalAlignment="Center"/>
+                <Label Content="FirstName" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" FontSize="15"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Name="firstName" Margin="0,0,0,30" FontSize="15"/>
+                <Label Content="LastName" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" FontSize="15"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Name="lastName" Margin="0,0,0,30" FontSize="15"/>
+                <Label Content="Phone" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" FontSize="15"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Name="phone" Margin="0,0,0,30" FontSize="15"/>
+
+            </Grid>
+
+        </GroupBox>
+    </Grid>
+</Window>
