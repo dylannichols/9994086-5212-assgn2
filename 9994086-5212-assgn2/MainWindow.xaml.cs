@@ -1,4 +1,11 @@
-﻿using System;
+﻿/* 
+ *  This is an interface for a customer database. Allows the user to list customers, find customers and change customer info
+ *  Dylan Nichols 2018
+ *  9994086
+ *  5212 Assignment 2
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +36,7 @@ namespace _9994086_5212_assgn2
             LoadDB();
         }
 
+        // Displays customer info in the listbox
         public void DisplayCustomers()
         {
             foreach (var x in CustomerDB)
@@ -37,6 +45,7 @@ namespace _9994086_5212_assgn2
             }
         }
 
+        // Clears the listbox
         public void ClearDisplay()
         {
             listBox.Items.Clear();
@@ -73,6 +82,7 @@ namespace _9994086_5212_assgn2
             ClearDisplay();
         }
 
+        // Clears content of form and enables add button
         private void Clear(object sender, RoutedEventArgs e)
         {
             ClearBoxes();
@@ -110,6 +120,7 @@ namespace _9994086_5212_assgn2
             }
         }
 
+        // If item in listbox is selected, display the item's info in the form
         private void SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             add.IsEnabled = false;
@@ -127,6 +138,7 @@ namespace _9994086_5212_assgn2
             }
         }
 
+        // Updates customer info if listbox item is selected
         private void Update(object sender, RoutedEventArgs e)
         {
             if (listBox.SelectedItem == null)
@@ -152,6 +164,7 @@ namespace _9994086_5212_assgn2
             }
         }
 
+        // Adds customers to CustomerDB
         private void Add(object sender, RoutedEventArgs e)
         {
             if (firstName.Text == "" || lastName.Text == "" || phone.Text == "")
@@ -168,6 +181,7 @@ namespace _9994086_5212_assgn2
             }
         }
 
+        // Delete customers from CustomerDB
         private void Delete(object sender, RoutedEventArgs e)
         {
             if (listBox.SelectedItem == null)
