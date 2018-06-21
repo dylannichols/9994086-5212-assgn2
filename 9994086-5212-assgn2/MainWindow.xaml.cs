@@ -53,7 +53,7 @@ namespace _9994086_5212_assgn2
         }
 
         // When clear button is clicked, clears content of the input boxes of the form
-        private void ClearBoxes(object sender, RoutedEventArgs e)
+        private void ClearBoxes()
         {
             firstName.Text = "";
             lastName.Text = "";
@@ -72,6 +72,12 @@ namespace _9994086_5212_assgn2
         {
             ClearDisplay();
         }
+
+        private void ClearForm(object sender, RoutedEventArgs e)
+        {
+            ClearBoxes();
+        }
+
         // Searches for the name entered into the search bar and if found, displays in the listbox
         private void Search(object sender, RoutedEventArgs e)
         {
@@ -104,14 +110,19 @@ namespace _9994086_5212_assgn2
 
         private void SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = listBox.SelectedItem as string;
-            var info = selected.Split('\t');
+            if (listBox.SelectedItem != null)
+            {
+                add.IsEnabled = false;
+                var selected = listBox.SelectedItem as string;
 
-            firstName.Text = info[0];
-            lastName.Text = info[1];
-            phone.Text = info[2];
+                var info = selected.Split('\t');
 
-            SelectedItemIndex = CustomerDB.FindIndex(x => x.FName == info[0]);
+                firstName.Text = info[0];
+                lastName.Text = info[1];
+                phone.Text = info[2];
+
+                SelectedItemIndex = CustomerDB.FindIndex(x => x.FName == info[0]);
+            }
         }
 
         private void Update(object sender, RoutedEventArgs e)
@@ -128,10 +139,20 @@ namespace _9994086_5212_assgn2
             }
             else
             {
-
+                CustomerDB[SelectedItemIndex].FName = firstName.Text;
+                CustomerDB[SelectedItemIndex].LName = lastName.Text;
+                CustomerDB[SelectedItemIndex].Phone = phone.Text;
+                ClearBoxes();
+                ClearDisplay();
+                DisplayCustomers();
+                MessageBox.Show("Customer details updated.");
+                add.IsEnabled = true;
             }
         }
 
-       
+        private void Add(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
